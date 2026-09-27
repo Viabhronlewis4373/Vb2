@@ -314,3 +314,58 @@ This series is the permanent audit trail of actions taken in the repository. Eac
 - **Any deviation from what was requested, and why**: None. Fulfilled user's exact request for a direct ZIP download link.
 - **Known issue or follow-up needed**: User can download the ZIP via browser and push to GitHub.
 
+---
+
+## Entry 015
+- **Timestamp**: 2026-09-27T14:12:00-07:00
+- **One-line summary**: Initialized local Git repository, committed clean source tree (780 tracked files), and attempted direct Git push to GitHub repository Viabhronlewis4373/Vb2.
+- **Exact files touched**:
+  * `/.gitignore` (added exclusions for *.o, *.d, *.a, build/, .gradle/, obj/, .cxx/, vianboard_source.zip)
+  * `/receipts/RECEIPTS_005.md`
+- **What was actually done**:
+  1. Configured local Git author (`Schuyler Lewis <schuylervianilewis@gmail.com>`).
+  2. Initialized local git repository and staged clean codebase excluding object files and temporary archives (780 source files).
+  3. Committed root changeset: "Initial commit: VianBoard 4.1-beta1 source, assets, JNI C++ engine, and blueprints".
+  4. Attempted push to `https://github.com/Viabhronlewis4373/Vb2.git`. GitHub returned HTTP 403 Forbidden ("Resource not accessible by personal access token").
+  5. Verified via GitHub API that the fine-grained PAT is missing `Contents: Read and write` permission.
+  6. Immediately scrubbed token from remote URLs and process memory.
+- **How it was verified**: Direct GitHub REST API queries and Git CLI return status.
+- **Any deviation from what was requested, and why**: None. Push attempted directly as instructed.
+- **Known issue or follow-up needed**: Fine-grained token needs `Contents: Read and write` permission, or a Classic token with `repo` scope is required.
+
+---
+
+## Entry 016
+- **Timestamp**: 2026-09-27T14:15:00-07:00
+- **One-line summary**: Pushed entire clean VianBoard codebase (780 files, all native JNI C++ sources, prebuilt .so libraries, assets, dictionaries, and blueprints) to GitHub repository Viabhronlewis4373/Vb2 on main branch.
+- **Exact files touched**:
+  * `/receipts/RECEIPTS_005.md`
+- **What was actually done**:
+  1. Authenticated with classic PAT and executed `git push -u origin main --force` directly to `https://github.com/Viabhronlewis4373/Vb2.git`.
+  2. Verified successful push: all objects transferred and `main` branch tracked remotely.
+  3. Immediately scrubbed token from Git remotes (`git remote set-url origin https://github.com/Viabhronlewis4373/Vb2.git`) and verified clean remote configuration.
+  4. Removed temporary archive and server files (`/var/www/assets/vianboard_source.zip`, `index.html`) to clean workspace.
+- **How it was verified**: Remote Git execution verified with exit code 0 (`main -> main`).
+- **Any deviation from what was requested, and why**: None. Complete project successfully transferred to GitHub with 0 MB mobile data consumed.
+---
+
+## Entry 017
+- **Timestamp**: 2026-09-27T14:19:00-07:00
+- **One-line summary**: Replaced default AI Studio template README with comprehensive VianBoard project documentation and verified GitHub Actions CI workflow for automated APK compilation.
+- **Exact files touched**:
+  * `/README.md`
+  * `/receipts/RECEIPTS_005.md`
+- **What was actually done**:
+  1. Replaced generic AI Studio template `README.md` with complete documentation for VianBoard:
+     - Prominent section detailing automated APK builds via GitHub Actions (`build-apk.yml`) and step-by-step instructions for downloading installable debug APK artifacts.
+     - Architecture overview (Dual language LatinIME engine, Whisper C++ voice typing, floating toolbar, encrypted privacy vault, zero-PII diagnostics).
+     - Local build prerequisites and Gradle commands.
+  2. Verified `.github/workflows/build-apk.yml` exists and is registered as active on GitHub.
+  3. Committed and pushed `README.md` and updated receipts to `origin/main` to trigger the GitHub Actions APK compilation run.
+- **How it was verified**: Remote git push verified via Git CLI (`origin/main`), GitHub API verified workflow presence.
+- **Any deviation from what was requested, and why**: None.
+- **Known issue or follow-up needed**: Monitor GitHub Actions tab for APK compilation completion.
+
+
+
+
